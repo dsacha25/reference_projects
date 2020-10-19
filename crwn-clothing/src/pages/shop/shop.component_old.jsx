@@ -1,19 +1,14 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import { Route } from "react-router-dom";
 
 import CollectionsOverviewContainer from "../../components/collections-overview/collections-overview.container";
 import CollectionPageContainer from "../collection/collection.container";
-import { fetchCollectionsStart } from "../../redux/shop/shop.actions";
 
-const ShopPage = ({ match }) => {
-	const dispatch = useDispatch();
-
+const ShopPage = ({ fetchCollectionsStart, match }) => {
 	useEffect(() => {
-		const fetchStart = () => dispatch(fetchCollectionsStart());
-
-		fetchStart();
-	}, [dispatch]);
+		fetchCollectionsStart();
+	}, [fetchCollectionsStart]);
 
 	return (
 		<div className="shop-page">
@@ -30,7 +25,11 @@ const ShopPage = ({ match }) => {
 	);
 };
 
-export default ShopPage;
+const mapDispatchToProps = (dispatch) => ({
+	fetchCollectionsStart: () => dispatch(fetchCollectionsStart()),
+});
+
+export default connect(null, mapDispatchToProps)(ShopPage);
 
 // const { updateCollections } = this.props;
 

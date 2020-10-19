@@ -1,10 +1,12 @@
 import React from "react";
-import { Link, withRouter } from "react-router-dom";
+import { useHistory, useRouteMatch } from "react-router-dom";
 import CollectionItem from "../collection-item/collection-item.component";
 
 import "./collection-preview.styles.scss";
 
-const CollectionPreview = ({ title, items, history, match }) => {
+const CollectionPreview = ({ title, items }) => {
+	const history = useHistory();
+	const match = useRouteMatch();
 	return (
 		<div className="collection-preview">
 			<h1
@@ -24,4 +26,4 @@ const CollectionPreview = ({ title, items, history, match }) => {
 	);
 };
 
-export default withRouter(CollectionPreview);
+export default CollectionPreview;
